@@ -10,7 +10,7 @@
 		1. [С SSL](#Запуск-на-сервере-с-установленным-сертификатом-SSL)
 		2. [Без SSL](#Запуск-на-localhost-или-на-сервере-без-SSL)
 	2. [Установка вебхука](#Установка-вебхука)
-3. Бот на Django
+3. [Бот на Django](#Бот-на-Django)
 
 ## Настройка рабочей среды
 
@@ -26,7 +26,7 @@ pip install -r requirements.txt
 
 Простой эхо-бот. Умеет работать только с `GET`-запросами.
 Для этого он использует библиотеку `requests`.  
-Для получения обновлений от Telegram используется метод `getUpdates`  
+Для получения обновлений от Telegram используется метод `getUpdates`.  
 Исходники лежат [здесь](https://github.com/Khalmatov/python-telegram-bots/tree/master/bot-hardcore).
 
 
@@ -88,3 +88,10 @@ https://api.telegram.org/bot123445:FJFIOEJFIOER/setWebhook?url=https://bot.mysit
   "description":"Webhook was set"
 }
 ```
+
+
+## Бот на Django
+
+Бот, который реализован внутри приложения Django и запускаетя по команде `python manage.py bot`.  
+Используется фреймворк [**python-telegram-bot**](https://github.com/python-telegram-bot/python-telegram-bot)  
+Исходники лежат [здесь](https://github.com/Khalmatov/python-telegram-bots/tree/master/bot-django).
