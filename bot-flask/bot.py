@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sslify import SSLify
 from flask import request
 from flask import jsonify
+from flask import Response
 
 import requests
 import json
@@ -14,26 +15,46 @@ app = Flask(__name__)  # __name__ - ссылка на текущий файл
 #		2) или через туннель localhost.run
 URL = f'https://api.telegram.org/bot{TOKEN}/'  # стандартный url для общения с ботом
 
-def write_json(dictionary):
-	with open('answer.json', 'w') as file:
-		json.dump(dictionary, file, indent=2, ensure_ascii=False)
+
+def send_message(chat_id, text='Подождите секунду, пожалуйста..'):
+	"""
+	Принимает два аргумента:
+		chat_id - id пользователя Telegram
+		text - строку (не обязательный аргумент)
+
+	Отправляет на указанный chat_id сообщение из text
+	"""
+
+	url = URL + f'sendMessage?chat_id={chat_id}&text={text}'
+	requests.get(url)
 
 
-
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/', methods=['GET'])
 def index():
 	"""
-	Функция запускается при поступлении запросов на корневой уровень
+	Функция запускается при поступлении get-запросов на корневой уровень
 	"""
+	return '<h1>Hello, i\'m a bot. Who are u?</h1>'
 
-	if request.method == 'POST':
+
+@app.route(f'/{TOKEN}', methods=['POST'])
+def bot():
+	"""
+	Функция запускается при поступлении post-запросов от телеграм
+
+	В поступившем JSON-е от Telegram парсится chat_id и текст сообщения
+	Отправителю высылается его же сообщение
+	"""
+	try:
 		r = request.get_json()
-		write_json(r)
-
-		return jsonify(r)
-
-	elif request.method == 'GET':
+		chat_id = r['message']['chat']['id']
+		text = r['message']['text']
+		send_message(chat_id, text)
+	except Exception as e:
+		print(repr(e))
 		return '<h1>Hello, i\'m a bot. Who are u?</h1>'
+	else:
+		return Response(status = 200)
 
 
 if __name__ == '__main__':
