@@ -11,6 +11,9 @@
 		2. [Без SSL](#Запуск-на-localhost-или-на-сервере-без-SSL)
 	2. [Установка вебхука](#Установка-вебхука)
 3. [Бот на Django](#Бот-на-Django)
+	1. [Настройка рабочей среды Django](#Настройка-рабочей-среды-Django)
+	2. [Запуск бота Django](#Запуск-бота-Django)
+4. [Полезные ресурсы](#Полезные-ресуры)
 
 ## Настройка рабочей среды
 
@@ -137,3 +140,9 @@ Available subcommands:
 ```python
 {'id': 1234567890, 'first_name': 'Крутой-бот', 'is_bot': True, 'username': 'very_cool_bot', 'can_join_groups': False, 'can_read_all_group_messages': False, 'supports_inline_queries': False}
 ```
+
+## Полезные ресурсы
+1. [Официальная документация Telegram Bot API *in English*](https://core.telegram.org/bots/api)
+2. [Документация Telegram Bot API *на русском*](https://tlgrm.ru/docs/bots/api)
+3. [Уроки про Telegram-боты от Олега Молчанова *на YouTube*](https://youtube.com/playlist?list=PLlWXhlUMyooaTZA4vxU9ZRZQPCFxUq9VA)
+4. [Уроки по фреймворку Aiogram от Physics is Simple *на YouTube*](https://youtube.com/playlist?list=PLwVBSkoL97Q3phZRyInbM4lShvS1cBl-U)
