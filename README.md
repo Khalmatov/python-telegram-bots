@@ -26,15 +26,20 @@ pip install -r requirements.txt
 
 Простой эхо-бот. Умеет работать только с `GET`-запросами.
 Для этого он использует библиотеку `requests`.  
-Для получения обновлений от Telegram используется метод `getUpdates`.  
+Для получения обновлений от Telegram используется метод `getUpdates`.
 Исходники лежат [здесь](https://github.com/Khalmatov/python-telegram-bots/tree/master/bot-hardcore).
+
+> Предполагается, что токен лежит в файле `config.py` в папке `bot-hardcore`
 
 
 ## Бот с webhook на Flask
 
 Разница между предыдущим ботом и этим в методе получения обновлений от Telegram.
 Здесь бот вместо того, чтобы периодически спамить сервера Telegram методом `getUpdates` для получения обновлений,
-работает по принципу `Webhook`. Исходники лежат [здесь](https://github.com/Khalmatov/python-telegram-bots/tree/master/bot-flask).
+работает по принципу `Webhook`.  
+Исходники лежат [здесь](https://github.com/Khalmatov/python-telegram-bots/tree/master/bot-flask).
+
+> Предполагается, что токен лежит в файле `config.py` в папке `bot-flask`
 
 1. ### Запуск бота на сервере
 	1. #### Запуск на сервере с установленным сертификатом SSL 
@@ -95,3 +100,40 @@ https://api.telegram.org/bot123445:FJFIOEJFIOER/setWebhook?url=https://bot.mysit
 Бот, который реализован внутри приложения Django и запускаетя по команде `python manage.py bot`.  
 Используется фреймворк [**python-telegram-bot**](https://github.com/python-telegram-bot/python-telegram-bot)  
 Исходники лежат [здесь](https://github.com/Khalmatov/python-telegram-bots/tree/master/bot-django).
+
+> Предполагается, что токен лежит в файле `config.py` в папке `bot-django`
+
+0. ### Настройка рабочей среды Django
+
+Для того, чтобы бот работал, он должен находиться внутри зарегистрированного приложения Django. Если у вас уже есть готовый проект на Django, переходите сразу на шаг №2. В ином случае:
+
+1. Создайте проект Django в терминале:
+```bash
+django-admin startproject myproject
+cd ./myproject
+```
+
+2. Скопируйте `bot-django` в родительскую папку проекта Django (в моем случае это папка `myproject`) и зарегистрируйте приложение в настройках по пути `myproject/settings.py':
+```python
+...
+INSTALLED_APPS = [
+	...
+	'bot-django',
+	]
+...
+```
+
+1. ### Запуск бота Django
+Если все прошло успешно, при наборе в терминале команды `python manage.py --help` вы должны увидеть что-то подобное:
+```bash
+Type 'manage.py help <subcommand>' for help on a specific subcommand.
+Available subcommands:
+...
+[bot-django]
+    bot
+```
+Как вы, наверное, уже догадались, запуск бота осуществляется командой `python manage.py bot`.
+Если бот успешно запущен, вы должны увидеть в терминале такой ответ:
+```python
+{'id': 1234567890, 'first_name': 'Крутой-бот', 'is_bot': True, 'username': 'very_cool_bot', 'can_join_groups': False, 'can_read_all_group_messages': False, 'supports_inline_queries': False}
+```
